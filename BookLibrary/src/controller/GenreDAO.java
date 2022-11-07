@@ -12,7 +12,7 @@ public class GenreDAO {
     
     private Connection con;
     private PreparedStatement cmd;
-    private String tableName = "";
+    private String tableName = "tb_genre";
     
     public GenreDAO(){
         //abrir uma nova conexão com o banco de dados
@@ -53,7 +53,7 @@ public class GenreDAO {
     
     public int update(Genre genre){
         try {
-            String SQL = "update tb_genre set name=? where id=?";
+            String SQL = "update " + this.tableName + " set name=? where id=?";
             
             cmd = con.prepareStatement(SQL);
             
@@ -79,7 +79,7 @@ public class GenreDAO {
     
     public List<Genre> searchByName(String name){
         try {
-            String SQL = "select * from tb_genre where data=?";
+            String SQL = "select * from " + this.tableName + " where data=?";
             
             cmd = con.prepareStatement(SQL);
             cmd.setString(1, name);
@@ -105,7 +105,7 @@ public class GenreDAO {
     
     public Genre searchById(int id){
         try {
-            String SQL = "select * from tb_genre where id=?";
+            String SQL = "select * from " + this.tableName + " where id=?";
             
             cmd = con.prepareStatement(SQL);
             cmd.setInt(1, id);
@@ -131,7 +131,32 @@ public class GenreDAO {
     
     public List<Genre> listById(){
         try {
-            String SQL = "select * from tb_genre order by id";
+            String SQL = "select * from " + this.tableName + " order by id";
+            
+            cmd = con.prepareStatement(SQL);
+            
+            ResultSet rs = cmd.executeQuery();
+            List<Genre> lista = new ArrayList<>();
+            
+            while(rs.next()){
+                Genre m = new Genre(
+                    rs.getInt("id"),
+                    rs.getString("name")
+                );
+                lista.add(m);
+            }
+            return lista;
+        } catch (Exception e) {
+            System.err.println("ERRO: " + e.getMessage());
+            return null;
+        }finally{
+            DatabaseConnection.desconectar(con);
+        }
+    }
+    
+    public List<Genre> listByName(){
+        try {
+            String SQL = "select * from " + this.tableName + " order by name";
             
             cmd = con.prepareStatement(SQL);
             

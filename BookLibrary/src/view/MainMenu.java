@@ -1,10 +1,7 @@
 package view;
 
 
-import model.Book;
 import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -49,15 +46,19 @@ public class MainMenu extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        menuCadastrar = new javax.swing.JMenu();
+        menuItemRegisterBook = new javax.swing.JMenuItem();
+        menuItemRegisterGenre = new javax.swing.JMenuItem();
+        menuItemRegisterPublisher = new javax.swing.JMenuItem();
+        menuItemRegisterAuthor = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         mListUser = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,29 +111,41 @@ public class MainMenu extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem2);
 
-        jMenuItem1.setText("Cadastrar Livro");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem1);
+        menuCadastrar.setText("Cadastrar");
 
-        jMenuItem7.setText("Alterar Livro");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        menuItemRegisterBook.setText("Livro");
+        menuItemRegisterBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                menuItemRegisterBookActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem7);
+        menuCadastrar.add(menuItemRegisterBook);
 
-        jMenuItem9.setText("Trocar Livro");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        menuItemRegisterGenre.setText("Gênero");
+        menuItemRegisterGenre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                menuItemRegisterGenreActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem9);
+        menuCadastrar.add(menuItemRegisterGenre);
+
+        menuItemRegisterPublisher.setText("Editora");
+        menuItemRegisterPublisher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemRegisterPublisherActionPerformed(evt);
+            }
+        });
+        menuCadastrar.add(menuItemRegisterPublisher);
+
+        menuItemRegisterAuthor.setText("Autor");
+        menuItemRegisterAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemRegisterAuthorActionPerformed(evt);
+            }
+        });
+        menuCadastrar.add(menuItemRegisterAuthor);
+
+        jMenu4.add(menuCadastrar);
 
         jMenuBar1.add(jMenu4);
 
@@ -181,6 +194,18 @@ public class MainMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
+        jMenu2.setText("Empréstimo");
+
+        jMenuItem1.setText("Alugar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,18 +222,10 @@ public class MainMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jMenu6ActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
@@ -216,10 +233,6 @@ public class MainMenu extends javax.swing.JFrame {
         if(resp == 0)
             System.exit(1);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
@@ -256,6 +269,31 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         openForm(new FormAboutProgram());
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void menuItemRegisterGenreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRegisterGenreActionPerformed
+        // TODO add your handling code here:
+        openForm(new FormRegisterGenre());
+    }//GEN-LAST:event_menuItemRegisterGenreActionPerformed
+
+    private void menuItemRegisterBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRegisterBookActionPerformed
+        // TODO add your handling code here:
+        openForm(new FormRegisterBook());
+    }//GEN-LAST:event_menuItemRegisterBookActionPerformed
+
+    private void menuItemRegisterPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRegisterPublisherActionPerformed
+        // TODO add your handling code here:
+        openForm(new FormRegisterPublisher());
+    }//GEN-LAST:event_menuItemRegisterPublisherActionPerformed
+
+    private void menuItemRegisterAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRegisterAuthorActionPerformed
+        // TODO add your handling code here:
+        openForm(new FormRegisterAuthor());
+    }//GEN-LAST:event_menuItemRegisterAuthorActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        openForm(new FormLoanBook());
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -294,6 +332,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
@@ -305,10 +344,13 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem mListUser;
+    private javax.swing.JMenu menuCadastrar;
+    private javax.swing.JMenuItem menuItemRegisterAuthor;
+    private javax.swing.JMenuItem menuItemRegisterBook;
+    private javax.swing.JMenuItem menuItemRegisterGenre;
+    private javax.swing.JMenuItem menuItemRegisterPublisher;
     private javax.swing.JDesktopPane workStation;
     // End of variables declaration//GEN-END:variables
     

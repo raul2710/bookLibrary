@@ -23,11 +23,6 @@ public class FormMyLibrary extends javax.swing.JInternalFrame {
      */
     public FormMyLibrary() {
         initComponents();
-    }
-    
-    public FormMyLibrary(User user) {
-        initComponents();
-        
         this.setTitle("Minha Biblioteca");
         this.setResizable(false);
         this.setMaximizable(false);
@@ -43,28 +38,6 @@ public class FormMyLibrary extends javax.swing.JInternalFrame {
         lblIsbnLabel.setVisible(false);
         
         configureTable();
-        fillTable(user.getBookLibrary());
-    }
-    
-    public FormMyLibrary(Administrator user) {
-        initComponents();
-        
-        this.setTitle("Minha Biblioteca");
-        this.setResizable(false);
-        this.setMaximizable(false);
-        this.setIconifiable(false);
-        this.setClosable(true);
-        
-        lblResultSearch.setText("");
-                
-        lblTitle.setText("");
-        lblPublisherLabel.setVisible(false);
-        lblAuthorLabel.setVisible(false);
-        lblGenreLabel.setVisible(false);
-        lblIsbnLabel.setVisible(false);
-        
-        configureTable();
-        fillTable(MainMenu.bookLibrary);
     }
     
     /**
@@ -181,7 +154,7 @@ public class FormMyLibrary extends javax.swing.JInternalFrame {
                                 .addComponent(lblAuthorLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 205, Short.MAX_VALUE))))
+                        .addGap(0, 264, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,25 +301,6 @@ public class FormMyLibrary extends javax.swing.JInternalFrame {
         m.addColumn("Gênero");
         m.addColumn("Isbn");
         tabBooks.setModel(m);
-    }
-    
-    private void fillTable(List<Book> bookLibrary){
-        DefaultTableModel m = (DefaultTableModel)
-                tabBooks.getModel();
-        
-        for (Book b : bookLibrary){
-            m.addRow(new Object[]
-                {
-                    b.getTitle(),
-                    b.getPublisher(),
-                    b.getAuthor(),
-                    b.getGenre(),
-                    b.getIsbn()
-                }
-            );
-        }
-        
-        tabBooks.setModel(m);        
     }
     
 }

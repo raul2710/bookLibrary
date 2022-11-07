@@ -12,7 +12,7 @@ public class AuthorDAO {
     
     private Connection con;
     private PreparedStatement cmd;
-    private String tableName = "";
+    private String tableName = "tb_author";
     
     public AuthorDAO(){
         //abrir uma nova conexão com o banco de dados
@@ -53,7 +53,7 @@ public class AuthorDAO {
     
     public int update(Author author){
         try {
-            String SQL = "update tb_author set name=? where id=?";
+            String SQL = "update " + this.tableName + " set name=? where id=?";
             
             cmd = con.prepareStatement(SQL);
             
@@ -79,7 +79,7 @@ public class AuthorDAO {
     
     public List<Author> searchByName(String name){
         try {
-            String SQL = "select * from tb_author where data=?";
+            String SQL = "select * from " + this.tableName + " where data=?";
             
             cmd = con.prepareStatement(SQL);
             cmd.setString(1, name);
@@ -105,7 +105,7 @@ public class AuthorDAO {
     
     public Author searchById(int id){
         try {
-            String SQL = "select * from tb_author where id=?";
+            String SQL = "select * from " + this.tableName + " where id=?";
             
             cmd = con.prepareStatement(SQL);
             cmd.setInt(1, id);
@@ -131,7 +131,32 @@ public class AuthorDAO {
     
     public List<Author> listById(){
         try {
-            String SQL = "select * from tb_author order by id";
+            String SQL = "select * from " + this.tableName + " order by id";
+            
+            cmd = con.prepareStatement(SQL);
+            
+            ResultSet rs = cmd.executeQuery();
+            List<Author> lista = new ArrayList<>();
+            
+            while(rs.next()){
+                Author m = new Author(
+                    rs.getInt("id"),
+                    rs.getString("name")
+                );
+                lista.add(m);
+            }
+            return lista;
+        } catch (Exception e) {
+            System.err.println("ERRO: " + e.getMessage());
+            return null;
+        }finally{
+            DatabaseConnection.desconectar(con);
+        }
+    }
+    
+    public List<Author> listByName(){
+        try {
+            String SQL = "select * from " + this.tableName + " order by name";
             
             cmd = con.prepareStatement(SQL);
             

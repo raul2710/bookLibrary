@@ -22,7 +22,7 @@ public class UserDAO {
     //ACTION: Search email and password
     public boolean isUserRegistered(String email, String password){
         try {
-            String SQL = "select * from tb_user where email=? and password=MD5(?)";
+            String SQL = "select * from " + this.tableName + " where email=? and password=MD5(?)";
             
             cmd = con.prepareStatement(SQL);
             cmd.setString(1, email);
@@ -44,8 +44,8 @@ public class UserDAO {
     //ACTION: Register user
     public int add(User user){
         try {
-            String SQL = "insert into " + this.tableName + "(cpf, name, telephone, email, password, dateOfBirth, status) "
-                    + "values (?, ?, ?, ?, ?, ?, ?)";
+            String SQL = "insert into " + this.tableName + "(cpf, name, telephone, email, password, dateBorn, status) "
+                    + "values (?, ?, ?, ?,MD5(?), ?, ?)";
                     
             cmd = con.prepareStatement(
                 SQL,
@@ -58,7 +58,7 @@ public class UserDAO {
             cmd.setString(3, user.getTelephone());
             cmd.setString(4, user.getEmail());
             cmd.setString(5, user.getPassword());
-            cmd.setDate(6, user.getDate_of_birth());
+            cmd.setDate(6, user.getDateBorn());
             cmd.setString(7, user.getStatus());
             
             //executar a operação
@@ -81,7 +81,8 @@ public class UserDAO {
     
     public int update(User user){
         try {
-            String SQL = "update tb_user set name=? where id=?";
+            String SQL = "update " + this.tableName + " set cpf=?, name=?, telephone=?, "
+                    + "email=?, password=?, dateBorn=?, status=? where id=?";
             
             cmd = con.prepareStatement(SQL);
             
@@ -91,7 +92,7 @@ public class UserDAO {
             cmd.setString(3, user.getTelephone());
             cmd.setString(4, user.getEmail());
             cmd.setString(5, user.getPassword());
-            cmd.setDate(6, user.getDate_of_birth());
+            cmd.setDate(6, user.getDateBorn());
             cmd.setString(7, user.getStatus());
             cmd.setInt(8, user.getId());
             
@@ -113,7 +114,7 @@ public class UserDAO {
     
     public List<User> searchByName(String name){
         try {
-            String SQL = "select * from tb_user where data=?";
+            String SQL = "select * from " + this.tableName + " where data=?";
             
             cmd = con.prepareStatement(SQL);
             cmd.setString(1, name);
@@ -145,7 +146,7 @@ public class UserDAO {
     
     public User searchById(int id){
         try {
-            String SQL = "select * from tb_user where id=?";
+            String SQL = "select * from " + this.tableName + " where id=?";
             
             cmd = con.prepareStatement(SQL);
             cmd.setInt(1, id);
@@ -177,7 +178,7 @@ public class UserDAO {
     
     public List<User> listById(){
         try {
-            String SQL = "select * from tb_user order by id";
+            String SQL = "select * from " + this.tableName + " order by id";
             
             cmd = con.prepareStatement(SQL);
             
@@ -192,7 +193,7 @@ public class UserDAO {
                     rs.getString("telephone"),
                     rs.getString("email"),
                     rs.getString("password"),
-                    rs.getDate("date_of_birth"),
+                    rs.getDate("dateBorn"),
                     rs.getString("status")  
                 );
                 lista.add(m);

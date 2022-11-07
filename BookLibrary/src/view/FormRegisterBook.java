@@ -1,9 +1,19 @@
 package view;
 
-import view.MainMenu;
+import controller.AuthorDAO;
+import controller.BookDAO;
+import controller.GenreDAO;
+import controller.PublisherDAO;
 import model.Book;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
+import model.Author;
+import java.util.List;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JPopupMenu;
+import model.Genre;
+import model.Publisher;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,35 +28,106 @@ import javax.swing.JOptionPane;
 public class FormRegisterBook extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form FormUserRegisterBook
+     * Creates new form FormBookRegisterBook
      */
     
-    private User user;
+    private JPopupMenu menu;
     
     public FormRegisterBook() {
         initComponents();
+        
+        this.setTitle("Cadastrar Livro");
+        this.setResizable(false);
+        this.setIconifiable(false);
+        this.setMaximizable(false);
+        this.setClosable(false);
+        txtId.setEditable(false);
+        
+        createFormatter("#############").install(txtIsbn);
+        
+        DefaultComboBoxModel m = new DefaultComboBoxModel();
+        List<Author> authorList = new AuthorDAO().listByName();
+        for(Author a : authorList){
+            m.addElement(a);
+        }
+        cbxAuthor.setModel(m);
+        
+        DefaultComboBoxModel n = new DefaultComboBoxModel();
+        List<Publisher> publisherList = new PublisherDAO().listByName();
+        for(Publisher p : publisherList){
+            n.addElement(p);
+        }
+        cbxPublisher.setModel(n);
+        
+        DefaultComboBoxModel o = new DefaultComboBoxModel();
+        List<Genre> genreList = new GenreDAO().listByName();
+        for(Genre g : genreList){
+            o.addElement(g);
+        }
+        cbxGenre.setModel(o);     
+        
+        ButtonGroup bg_fg = new ButtonGroup();
+        bg_fg.add(rdbAvailable);
+        bg_fg.add(rdbUnavailable);
+        rdbAvailable.setSelected(true);  
     }
     
-    public FormRegisterBook(User user) {
+    public FormRegisterBook(int id) {
         initComponents();
-
+        
         this.setTitle("Cadastrar Livro");
-        this.setMaximizable(false);
-        this.setIconifiable(false);
         this.setResizable(false);
-        this.setClosable(true);
+        this.setIconifiable(false);
+        this.setMaximizable(false);
+        this.setClosable(false);
+        txtId.setEditable(false);
         
-        this.user = user;
+        createFormatter("#############").install(txtIsbn);
         
-        //Adiciona alguns generos ao combo box
-        cbxGenre.setModel(new DefaultComboBoxModel());
+        Book book = new BookDAO().searchById(id);
         
-        for(String genre: MainMenu.genreList)
-            cbxGenre.addItem(genre);
+        DefaultComboBoxModel m = (DefaultComboBoxModel)cbxAuthor.getModel();
         
-        cbxGenre.setSelectedItem(1);
-    }
+        int i;
+        for (i = 0; i < m.getSize(); i++) {
+            Author a = (Author)m.getElementAt(i);
+            if (a.getId() == book.getId_author()){
+                break;
+            }
+        }
+        cbxAuthor.setSelectedIndex(i);
+        
+        DefaultComboBoxModel n = (DefaultComboBoxModel)cbxPublisher.getModel();
+         
+        for (i = 0; i < n.getSize(); i++) {
+            Publisher p = (Publisher)n.getElementAt(i);
+            if (p.getId() == book.getId_publisher()){
+                break;
+            }
+        }
+        cbxPublisher.setSelectedIndex(i);
+        
+        DefaultComboBoxModel o = (DefaultComboBoxModel)cbxGenre.getModel();
+        
+        for (i = 0; i < n.getSize(); i++) {
+            Genre g = (Genre)o.getElementAt(i);
+            if (g.getId() == book.getId_genre()){
+                break;
+            }
+        }
+        cbxGenre.setSelectedIndex(i);
 
+        ButtonGroup bg_fg = new ButtonGroup();
+        bg_fg.add(rdbAvailable);
+        bg_fg.add(rdbUnavailable);
+
+        if(book.getStatus().equals("Disponível"))
+            rdbAvailable.setSelected(true);
+        else
+            rdbUnavailable.setSelected(true);
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,7 +138,7 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblCadastreSeuLivro = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         cbxGenre = new javax.swing.JComboBox<>();
         btnSave = new javax.swing.JButton();
@@ -65,20 +146,65 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
         txtTitle = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescription = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtPublisher = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtIsbn = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtAuthor = new javax.swing.JTextField();
+        lblTitulo = new javax.swing.JLabel();
+        lblEditora = new javax.swing.JLabel();
+        lblIsbn = new javax.swing.JLabel();
+        lblGenero = new javax.swing.JLabel();
+        lblDescricao = new javax.swing.JLabel();
+        lblAutor = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        rdbUnavailable = new javax.swing.JRadioButton();
+        rdbAvailable = new javax.swing.JRadioButton();
+        lblStatus = new javax.swing.JLabel();
+        txtIsbn = new javax.swing.JFormattedTextField();
+        txtEdition = new javax.swing.JFormattedTextField();
+        btnAddGenre = new javax.swing.JButton();
+        btnAddAuthor = new javax.swing.JButton();
+        btnAddPublisher = new javax.swing.JButton();
+        cbxPublisher = new javax.swing.JComboBox<>();
+        cbxAuthor = new javax.swing.JComboBox<>();
+        btnBack = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Cadastre seu livro");
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+
+        jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel1FocusGained(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
+
+        lblCadastreSeuLivro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCadastreSeuLivro.setText("Cadastre seu livro");
 
         cbxGenre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -100,92 +226,193 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
         txtDescription.setRows(5);
         jScrollPane1.setViewportView(txtDescription);
 
-        jLabel2.setText("Nome do livro:");
+        lblTitulo.setText("Titulo:");
 
-        jLabel3.setText("Editora:");
+        lblEditora.setText("Editora:");
 
-        jLabel4.setText("ISBN:");
+        lblIsbn.setText("ISBN:");
 
-        jLabel5.setText("Gênero:");
+        lblGenero.setText("Gênero:");
 
-        jLabel6.setText("Descrição:");
+        lblDescricao.setText("Descrição:");
 
-        jLabel7.setText("Autor:");
+        lblAutor.setText("Autor:");
+
+        lblId.setText("Id:");
+
+        jLabel1.setText("Edition:");
+
+        rdbUnavailable.setText("Emprestado");
+        rdbUnavailable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbUnavailableActionPerformed(evt);
+            }
+        });
+
+        rdbAvailable.setText("Disponível");
+
+        lblStatus.setText("Status:");
+
+        btnAddGenre.setText("Adicionar");
+        btnAddGenre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddGenreActionPerformed(evt);
+            }
+        });
+
+        btnAddAuthor.setText("Adicionar");
+        btnAddAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddAuthorActionPerformed(evt);
+            }
+        });
+
+        btnAddPublisher.setText("Adicionar");
+        btnAddPublisher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPublisherActionPerformed(evt);
+            }
+        });
+
+        cbxPublisher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cbxAuthor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnBack.setText("Voltar");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator1))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblStatus)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rdbAvailable)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rdbUnavailable))
+                            .addComponent(lblCadastreSeuLivro))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
-                            .addComponent(txtTitle)
-                            .addComponent(jLabel3)
-                            .addComponent(txtPublisher)
-                            .addComponent(txtIsbn)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(txtAuthor)
-                            .addComponent(cbxGenre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 16, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblGenero)
+                                        .addComponent(lblEditora)
+                                        .addComponent(lblDescricao)
+                                        .addComponent(lblAutor))
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(lblTitulo)
+                                            .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(txtTitle))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblId)
+                                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblIsbn)
+                                        .addComponent(cbxAuthor, 0, 276, Short.MAX_VALUE)
+                                        .addComponent(cbxPublisher, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnAddAuthor)
+                                        .addComponent(btnAddPublisher)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(txtIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(txtEdition, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(cbxGenre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnAddGenre))))
+                        .addGap(23, 23, 23))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(105, 105, 105))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnClear)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSave)
-                        .addGap(21, 21, 21))))
+                .addComponent(btnBack)
+                .addGap(18, 18, 18)
+                .addComponent(btnClear)
+                .addGap(18, 18, 18)
+                .addComponent(btnSave)
+                .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(lblCadastreSeuLivro)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo)
+                    .addComponent(lblId))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addComponent(lblEditora)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddPublisher)
+                    .addComponent(cbxPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7)
+                .addComponent(lblAutor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddAuthor)
+                    .addComponent(cbxAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblIsbn)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEdition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addComponent(lblGenero)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbxGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddGenre))
+                .addGap(20, 20, 20)
+                .addComponent(lblDescricao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdbAvailable)
+                    .addComponent(rdbUnavailable)
+                    .addComponent(lblStatus))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
-                    .addComponent(btnClear))
-                .addGap(21, 21, 21))
+                    .addComponent(btnClear)
+                    .addComponent(btnBack))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RegisterBook.png"))); // NOI18N
@@ -194,15 +421,15 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(56, Short.MAX_VALUE)
                 .addComponent(jLabel9)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(160, 160, 160)
+                .addGap(144, 144, 144)
                 .addComponent(jLabel9)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -214,7 +441,8 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,66 +453,170 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+    private void rdbUnavailableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbUnavailableActionPerformed
         // TODO add your handling code here:
-
-        try{
-            if(!txtTitle.getText().isEmpty() && !txtPublisher.getText().isEmpty() &&
-                !txtAuthor.getText().isEmpty() && !txtDescription.getText().isEmpty()){
-                String title = txtTitle.getText();
-                String publisher = txtPublisher.getText();
-                String author = txtAuthor.getText();
-                int isbn = Integer.parseInt(txtIsbn.getText());
-                String genre = cbxGenre.getSelectedItem().toString();
-                String description = txtDescription.getText();
-
-                Book book = new Book(title, publisher, author, isbn, genre, description);
-
-                user.getBookLibrary().add(book);
-                
-                JOptionPane.showMessageDialog(null, "Livro salvo na sua biblioteca", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
-
-                this.dispose();
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Não deixe campos vazios", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        
-        } catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Apenas números no isbn", "Error", JOptionPane.ERROR_MESSAGE);
-        } 
-    }//GEN-LAST:event_btnSaveActionPerformed
+    }//GEN-LAST:event_rdbUnavailableActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
         txtTitle.setText("");
-        txtPublisher.setText("");
-        txtAuthor.setText("");
+        
         txtIsbn.setText(String.valueOf(""));
         cbxGenre.setSelectedItem("");
         txtDescription.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+
+        //Recuperar o valor informado pelo usuário
+        Book book = new Book();
+        book.setIsbn(txtIsbn.getText());
+        book.setTitle(txtTitle.getText());
+        
+        Author a = (Author)cbxAuthor.getSelectedItem();
+        book.setId_author(a.getId());
+            
+        Publisher p = (Publisher)cbxPublisher.getSelectedItem();
+        book.setId_publisher(p.getId());
+        
+        Genre g = (Genre)cbxGenre.getSelectedItem();
+        book.setId_genre(g.getId());
+        
+        book.setEdition(Integer.parseInt(txtEdition.getText()));
+        //book.setRating(rdbActive.isSelected() ? "Ativo" : "Inativo");
+        book.setStatus(rdbAvailable.isSelected() ? "Disponível" : "Emprestado");
+        book.setDescription(txtDescription.getText());
+
+        int res = -1;
+        if (txtId.getText().isEmpty()){
+            //Operação de INSERIR
+            res = new BookDAO().add(book);
+        }else{
+            //Operação de ATUALIZAR
+            book.setId(Integer.parseInt(txtId.getText()));
+            res = new BookDAO().update(book);
+        }
+
+        //Verificar se deu certo
+        if (res > 0){
+            txtId.setText(String.valueOf(res));
+            JOptionPane.showMessageDialog(
+                null,"Operação realizada com sucesso!"
+            );
+        }else{
+            JOptionPane.showMessageDialog(
+                null,"Não foi possível realizar a operação!"
+            );
+        }
+
+        this.dispose();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnAddPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPublisherActionPerformed
+        //Abrir o FormCadastro              
+        FormRegisterPublisher f = new FormRegisterPublisher();
+        this.getDesktopPane().add(f);
+        f.setVisible(true);
+    }//GEN-LAST:event_btnAddPublisherActionPerformed
+
+    private void btnAddAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAuthorActionPerformed
+        FormRegisterAuthor f = new FormRegisterAuthor();
+        this.getDesktopPane().add(f);
+        f.setVisible(true);
+    }//GEN-LAST:event_btnAddAuthorActionPerformed
+
+    private void btnAddGenreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddGenreActionPerformed
+        FormRegisterGenre f = new FormRegisterGenre();
+        this.getDesktopPane().add(f);
+        f.setVisible(true);
+    }//GEN-LAST:event_btnAddGenreActionPerformed
+
+    private void jPanel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusGained
+        // TODO add your handling code here:
+                
+    }//GEN-LAST:event_jPanel1FocusGained
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formFocusGained
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        DefaultComboBoxModel m = new DefaultComboBoxModel();
+        List<Author> authorList = new AuthorDAO().listByName();
+        for(Author a : authorList){
+            m.addElement(a);
+        }
+        cbxAuthor.setModel(m);
+        
+        DefaultComboBoxModel n = new DefaultComboBoxModel();
+        List<Publisher> publisherList = new PublisherDAO().listByName();
+        for(Publisher p : publisherList){
+            n.addElement(p);
+        }
+        cbxPublisher.setModel(n);
+        
+        DefaultComboBoxModel o = new DefaultComboBoxModel();
+        List<Genre> genreList = new GenreDAO().listByName();
+        for(Genre g : genreList){
+            o.addElement(g);
+        }
+        cbxGenre.setModel(o);  
+    }//GEN-LAST:event_formInternalFrameActivated
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:]
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddAuthor;
+    private javax.swing.JButton btnAddGenre;
+    private javax.swing.JButton btnAddPublisher;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox<String> cbxAuthor;
     private javax.swing.JComboBox<String> cbxGenre;
+    private javax.swing.JComboBox<String> cbxPublisher;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField txtAuthor;
+    private javax.swing.JLabel lblAutor;
+    private javax.swing.JLabel lblCadastreSeuLivro;
+    private javax.swing.JLabel lblDescricao;
+    private javax.swing.JLabel lblEditora;
+    private javax.swing.JLabel lblGenero;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblIsbn;
+    private javax.swing.JLabel lblStatus;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JRadioButton rdbAvailable;
+    private javax.swing.JRadioButton rdbUnavailable;
     private javax.swing.JTextArea txtDescription;
-    private javax.swing.JTextField txtIsbn;
-    private javax.swing.JTextField txtPublisher;
+    private javax.swing.JFormattedTextField txtEdition;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JFormattedTextField txtIsbn;
     private javax.swing.JTextField txtTitle;
     // End of variables declaration//GEN-END:variables
+    
+    protected MaskFormatter createFormatter(String s) {
+        MaskFormatter formatter = null;
+        try {
+            formatter = new MaskFormatter(s);
+            formatter.setPlaceholderCharacter('_');
+        } catch (java.text.ParseException exc) {
+            System.err.println("formatter is bad: " + exc.getMessage());
+            System.exit(-1);
+        }
+
+        return formatter;
+    }
 }

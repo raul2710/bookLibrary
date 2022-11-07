@@ -12,7 +12,7 @@ public class LoanDAO {
 
     private Connection con;
     private PreparedStatement cmd;
-    private String tableName = "";
+    private String tableName = "tb_loan";
     
     public LoanDAO(){
         //abrir uma nova conexão com o banco de dados
@@ -22,8 +22,8 @@ public class LoanDAO {
     //ACTION: Register loan
     public int add(Loan loan){
         try {
-            String SQL = "insert into " + this.tableName + "(name) "
-                    + "values (?)";
+            String SQL = "insert into " + this.tableName + "(id_book, id_user, dateBorrow, dateReturn, status) "
+                    + "values (?, ?, ?, ?, ?)";
                     
             cmd = con.prepareStatement(
                 SQL,
@@ -35,7 +35,7 @@ public class LoanDAO {
             cmd.setInt(2, loan.getId_book());
             cmd.setInt(3, loan.getId_user());
             cmd.setDate(4, loan.getDateBorrow());
-            cmd.setDate(5, loan.getDateDevolution());
+            cmd.setDate(5, loan.getDateReturn());
             cmd.setString(6, loan.getStatus());
             
             //executar a operação
@@ -58,7 +58,8 @@ public class LoanDAO {
     
     public int update(Loan loan){
         try {
-            String SQL = "update tb_loan set name=? where id=?";
+            String SQL = "update " + this.tableName + "set id_book=?, id_user=?, dateBorrow=?, dateReturn=?,"
+                    + " status=? where id=?";
             
             cmd = con.prepareStatement(SQL);
             
@@ -67,7 +68,7 @@ public class LoanDAO {
             cmd.setInt(2, loan.getId_book());
             cmd.setInt(3, loan.getId_user());
             cmd.setDate(4, loan.getDateBorrow());
-            cmd.setDate(5, loan.getDateDevolution());
+            cmd.setDate(5, loan.getDateReturn());
             cmd.setString(6, loan.getStatus());
             cmd.setInt(7, loan.getId());
             
@@ -89,7 +90,7 @@ public class LoanDAO {
     
     public List<Loan> searchByName(String name){
         try {
-            String SQL = "select * from tb_loan where data=?";
+            String SQL = "select * from " + this.tableName + " where name=?";
             
             cmd = con.prepareStatement(SQL);
             cmd.setString(1, name);
@@ -103,7 +104,7 @@ public class LoanDAO {
                     rs.getInt("id_book"),
                     rs.getInt("id_user"),
                     rs.getDate("dateBorrow"),
-                    rs.getDate("dateDevolution"),
+                    rs.getDate("dateReturn"),
                     rs.getString("status")     
                 );
                 lista.add(m);
@@ -119,7 +120,7 @@ public class LoanDAO {
     
     public Loan searchById(int id){
         try {
-            String SQL = "select * from tb_loan where id=?";
+            String SQL = "select * from " + this.tableName + " where id=?";
             
             cmd = con.prepareStatement(SQL);
             cmd.setInt(1, id);
@@ -132,7 +133,7 @@ public class LoanDAO {
                     rs.getInt("id_book"),
                     rs.getInt("id_user"),
                     rs.getDate("dateBorrow"),
-                    rs.getDate("dateDevolution"),
+                    rs.getDate("dateReturn"),
                     rs.getString("status")      
                 );
                 return m;
@@ -149,7 +150,7 @@ public class LoanDAO {
     
     public List<Loan> listById(){
         try {
-            String SQL = "select * from tb_loan order by id";
+            String SQL = "select * from " + this.tableName + " order by id";
             
             cmd = con.prepareStatement(SQL);
             
@@ -162,7 +163,7 @@ public class LoanDAO {
                     rs.getInt("id_book"),
                     rs.getInt("id_user"),
                     rs.getDate("dateBorrow"),
-                    rs.getDate("dateDevolution"),
+                    rs.getDate("dateReturn"),
                     rs.getString("status")    
                 );
                 lista.add(m);

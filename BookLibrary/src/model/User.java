@@ -10,7 +10,7 @@ public class User {
     private String telephone;
     private String email;
     private String password;
-    private Date date_of_birth;
+    private Date dateBorn;
     private String status;
     //private String adress;
 
@@ -22,14 +22,14 @@ public class User {
         this.password = password;
     }
 
-    public User(int id, String cpf, String name, String telephone, String email, String password, Date date_of_birth, String status) {
+    public User(int id, String cpf, String name, String telephone, String email, String password, Date dateBorn, String status) {
         this.id = id;
         this.cpf = cpf;
         this.name = name;
         this.telephone = telephone;
         this.email = email;
         this.password = password;
-        this.date_of_birth = date_of_birth;
+        this.dateBorn = dateBorn;
         this.status = status;
     }
 
@@ -81,12 +81,12 @@ public class User {
         this.password = password;
     }
 
-    public Date getDate_of_birth() {
-        return date_of_birth;
+    public Date getDateBorn() {
+        return dateBorn;
     }
 
-    public void setDate_of_birth(Date date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setDateBorn(Date dateBorn) {
+        this.dateBorn = dateBorn;
     }
 
     public String getStatus() {

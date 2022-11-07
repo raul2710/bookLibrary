@@ -1,13 +1,10 @@
 package view;
 
-
-import view.MainMenu;
 import model.Book;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,14 +21,9 @@ public class FormListSwapBooks extends javax.swing.JInternalFrame {
     /**
      * Creates new form FormListSwapBooks
      */
-    private User user;
 
     public FormListSwapBooks() {
         initComponents();
-    }
-    
-    public FormListSwapBooks(User user) {
-        initComponents();
         
         this.setTitle("Troque seus livros");
         this.setResizable(false);
@@ -39,22 +31,6 @@ public class FormListSwapBooks extends javax.swing.JInternalFrame {
         this.setIconifiable(false);
         this.setClosable(true);
         
-        this.user = user;
-        
-        fillList(user.getBookLibrary(), this.lstMyLibrary);
-        fillList(MainMenu.bookLibrary, this.lstGlobalLibrary);
-    }
-    
-    public FormListSwapBooks(Administrator admin) {
-        initComponents();
-        
-        this.setTitle("Troque seus livros");
-        this.setResizable(false);
-        this.setMaximizable(false);
-        this.setIconifiable(false);
-        this.setClosable(true);
-        
-        fillList(MainMenu.bookLibrary, this.lstGlobalLibrary);
     }
 
     /**
@@ -164,25 +140,7 @@ public class FormListSwapBooks extends javax.swing.JInternalFrame {
     private void btnSwapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSwapActionPerformed
         // TODO add your handling code here:
         
-        if(!lstMyLibrary.isSelectionEmpty() && !lstGlobalLibrary.isSelectionEmpty()){
-            int myBookIndex = lstMyLibrary.getSelectedIndex();
-            int globalBookIndex = lstGlobalLibrary.getSelectedIndex();
-
-            Book libraryBook = MainMenu.bookLibrary.get(globalBookIndex);
-            Book userBook = user.getBookLibrary().get(myBookIndex);
-
-            user.getBookLibrary().remove(myBookIndex);
-            user.getBookLibrary().add(libraryBook);
-
-            MainMenu.bookLibrary.remove(globalBookIndex);
-            MainMenu.bookLibrary.add(userBook);
-
-            fillList(user.getBookLibrary(), this.lstMyLibrary);
-            fillList(MainMenu.bookLibrary, this.lstGlobalLibrary);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Você deve selecionar dois livros para trocar", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        
         
     }//GEN-LAST:event_btnSwapActionPerformed
 

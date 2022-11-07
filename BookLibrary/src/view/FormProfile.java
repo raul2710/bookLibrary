@@ -17,10 +17,6 @@ public class FormProfile extends javax.swing.JInternalFrame {
      */
     public FormProfile() {
         initComponents();
-    }
-    
-    public FormProfile(User user) {
-        initComponents();
         
         this.setTitle("Visualizar Perfil");
         this.setResizable(false);
@@ -28,7 +24,7 @@ public class FormProfile extends javax.swing.JInternalFrame {
         this.setIconifiable(false);
         this.setClosable(true);
         
-        String firstName = user.getName().replaceAll(" \\w.+", "");
+        /*String firstName = user.getName().replaceAll(" \\w.+", "");
         String lasName = user.getName().replaceAll("^\\w+ ", "");
         String email = user.getEmail();
         String age = String.valueOf(user.getAge());
@@ -36,25 +32,8 @@ public class FormProfile extends javax.swing.JInternalFrame {
         lblFirstName.setText(firstName);    
         lblLastName.setText(lasName);
         lblEmail.setText(email);
-        lblAge.setText(age);
+        lblAge.setText(age);*/
     }
-    
-    public FormProfile(Administrator admin) {
-        initComponents();
-        
-        this.setTitle("Visualizar Perfil");
-        this.setResizable(false);
-        this.setMaximizable(false);
-        this.setIconifiable(false);
-        this.setClosable(true);
-                
-        lblFirstName.setText("Admin");    
-        lblLastName.setText("");
-        lblEmail.setText(admin.getEmail());
-        lblAge.setVisible(false);
-        lblIdade.setVisible(false);
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

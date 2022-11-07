@@ -5,10 +5,10 @@ public class Book {
     private int id;
     private String isbn;
     private String title;
-    private int edition;
     private int id_genre;
     private int id_publisher;
     private int id_author;
+    private int edition;
     private int rating;
     private String status;
     private String description;
@@ -16,14 +16,14 @@ public class Book {
     public Book() {
     }
 
-    public Book(int id, String isbn, String title, int edition, int id_genre, int id_publisher, int id_author, int rating, String status, String description) {
+    public Book(int id, String isbn, String title, int id_genre, int id_publisher, int id_author, int edition, int rating, String status, String description) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
-        this.edition = edition;
         this.id_genre = id_genre;
         this.id_publisher = id_publisher;
         this.id_author = id_author;
+        this.edition = edition;
         this.rating = rating;
         this.status = status;
         this.description = description;
@@ -53,14 +53,6 @@ public class Book {
         this.title = title;
     }
 
-    public int getEdition() {
-        return edition;
-    }
-
-    public void setEdition(int edition) {
-        this.edition = edition;
-    }
-
     public int getId_genre() {
         return id_genre;
     }
@@ -83,6 +75,14 @@ public class Book {
 
     public void setId_author(int id_author) {
         this.id_author = id_author;
+    }
+
+    public int getEdition() {
+        return edition;
+    }
+
+    public void setEdition(int edition) {
+        this.edition = edition;
     }
 
     public int getRating() {
@@ -108,7 +108,7 @@ public class Book {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     @Override
     public String toString() {
         return title;

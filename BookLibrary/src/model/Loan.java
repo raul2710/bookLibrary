@@ -8,18 +8,18 @@ public class Loan {
     private int id_book;
     private int id_user;
     private Date dateBorrow;
-    private Date dateDevolution;
+    private Date dateReturn;
     private String status;
 
     public Loan() {
     }
 
-    public Loan(int id, int id_book, int id_user, Date dateBorrow, Date dateDevolution, String status) {
+    public Loan(int id, int id_book, int id_user, Date dateBorrow, Date dateReturn, String status) {
         this.id = id;
         this.id_book = id_book;
         this.id_user = id_user;
         this.dateBorrow = dateBorrow;
-        this.dateDevolution = dateDevolution;
+        this.dateReturn = dateReturn;
         this.status = status;
     }
 
@@ -55,12 +55,12 @@ public class Loan {
         this.dateBorrow = dateBorrow;
     }
 
-    public Date getDateDevolution() {
-        return dateDevolution;
+    public Date getDateReturn() {
+        return dateReturn;
     }
 
-    public void setDateDevolution(Date dateDevolution) {
-        this.dateDevolution = dateDevolution;
+    public void setDateReturn(Date dateReturn) {
+        this.dateReturn = dateReturn;
     }
 
     public String getStatus() {

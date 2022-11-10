@@ -1,29 +1,20 @@
 package view;
 
-
 import controller.BookDAO;
-import controller.DatabaseConnection;
 import java.awt.Dimension;
-import model.Book;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
 import javax.swing.DefaultButtonModel;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.BookInformation;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Raul
@@ -33,21 +24,18 @@ public class FormBookTable extends javax.swing.JInternalFrame {
     /**
      * Creates new form FormBookTable
      */
-
     public FormBookTable() {
         initComponents();
-        
+
         this.setTitle("Pesquisa de livros");
         this.setResizable(false);
         this.setMaximizable(false);
         this.setIconifiable(false);
         this.setClosable(true);
-        
+
         configureTable();
-                       
+
         //fillTable("", "title");
-        
-        
         configureButtonGroup();
     }
 
@@ -62,7 +50,7 @@ public class FormBookTable extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabBooks = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnAboutBook = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         rdbTitle = new javax.swing.JRadioButton();
@@ -74,6 +62,12 @@ public class FormBookTable extends javax.swing.JInternalFrame {
         btnSearch = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         rdbGenre = new javax.swing.JRadioButton();
+
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         tabBooks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,10 +87,10 @@ public class FormBookTable extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tabBooks);
 
-        jButton1.setText("Saiba mais...");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAboutBook.setText("Saiba mais...");
+        btnAboutBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAboutBookActionPerformed(evt);
             }
         });
 
@@ -185,7 +179,7 @@ public class FormBookTable extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton2)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1))
+                                .addComponent(btnAboutBook))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 3, Short.MAX_VALUE)))
                 .addGap(39, 39, 39))
@@ -219,26 +213,26 @@ public class FormBookTable extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnAboutBook))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAboutBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutBookActionPerformed
         // TODO add your handling code here:
         int row = tabBooks.getSelectedRow();
-        
-        try{
-            
-
-            
-        }catch(Exception e){
+        int id = Integer.parseInt(
+            tabBooks.getValueAt(row, 0).toString()
+        );
+        try {
+            openForm(new FormAboutBook(id));
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Selecione algum livro!!", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_btnAboutBookActionPerformed
 
     private void rdbTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbTitleActionPerformed
         // TODO add your handling code here:  
@@ -264,41 +258,57 @@ public class FormBookTable extends javax.swing.JInternalFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         initTableWithoutRow();
-        ButtonGroup group = ((DefaultButtonModel)rdbAuthor.getModel()).getGroup();
-        
-        try{
-            if(rdbGenre.isSelected()){
+        ButtonGroup group = ((DefaultButtonModel) rdbAuthor.getModel()).getGroup();
+
+        try {
+            if (rdbGenre.isSelected()) {
                 fillTable(txtSearch.getText(), "genre.name");
-            }    
-            else if(rdbPublisher.isSelected()){
+            } else if (rdbPublisher.isSelected()) {
                 fillTable(txtSearch.getText(), "publisher.name");
-            }                
-            else if(rdbAuthor.isSelected()){
+            } else if (rdbAuthor.isSelected()) {
                 fillTable(txtSearch.getText(), "author.name");
-            }               
-            else 
+            } else {
                 fillTable(txtSearch.getText(), "title");
-               
-            
-            if(tabBooks.getRowCount() == 0){
+            }
+
+            if (tabBooks.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(null, "Nenhum livro encontrado", "Resultado", JOptionPane.INFORMATION_MESSAGE);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Digite algo para pesquisar", "Error", JOptionPane.ERROR_MESSAGE);
         }
-           
+
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void tabBooksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabBooksMouseClicked
-        // TODO add your handling code here:
-        
-        
+        //Double click
+        if (evt.getClickCount() == 2) {
+            //Descobrir a linha selecionada
+            int linha = tabBooks.getSelectedRow();
+
+            //Recuperar o ID selecionado
+            int id = Integer.parseInt(
+                    tabBooks.getValueAt(linha, 0).toString()
+            );
+
+            //Abrir o FormCadastro
+            FormRegisterBook f = new FormRegisterBook(id);
+            this.getDesktopPane().add(f);
+            f.setVisible(true);
+
+            //Fechar o FormPesquisa
+            //this.dispose();
+        }
     }//GEN-LAST:event_tabBooksMouseClicked
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+
+    }//GEN-LAST:event_formFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAboutBook;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -313,8 +323,8 @@ public class FormBookTable extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 
-    private void configureButtonGroup(){
-        
+    private void configureButtonGroup() {
+
         ButtonGroup bg = new ButtonGroup();
 
         bg.add(rdbTitle);
@@ -324,59 +334,36 @@ public class FormBookTable extends javax.swing.JInternalFrame {
         bg.add(rdbIsbn);
         rdbTitle.setSelected(true);
     }
-    
-    private void fillTable(String search, String where){ 
-        
-        Connection con = DatabaseConnection.conectar();
-        PreparedStatement cmd;
-        
-        try {
-            String SQL = "select book.id, book.isbn, book.title, genre.name as genre_name,\n" +
-            "    publisher.name as publisher_name, author.name as author_name, book.edition, book.status\n" +
-            "    from tb_book as book\n" +
-            "    join tb_genre as genre\n" +
-            "       on book.id_genre = genre.id\n" +
-            "    inner join tb_author as author\n" +
-            "       on book.id_author = author.id\n" +
-            "    inner join tb_publisher as publisher\n" +
-            "       on book.id_publisher = publisher.id\n" +
-            "    where "+ where +" ilike ? ";
-            /*Funciona apenas colocando o ilike como parametro, o where 
-            aparentemente não funciona ao colocar interrogação*/
-            
-            cmd = con.prepareStatement(SQL);
-            cmd.setString(1, "%" + search + "%");
-            
-            ResultSet rs = cmd.executeQuery();
-            
-            DefaultTableModel mTab = (DefaultTableModel) tabBooks.getModel();
-            
-            while(rs.next()){
-                System.out.println("teste1");
-                mTab.addRow(new Object[]{
-                    rs.getInt("id"),
-                    rs.getString("isbn"),
-                    rs.getString("title"),
-                    rs.getString("genre_name"),
-                    rs.getString("publisher_name"),
-                    rs.getString("author_name"),
-                    rs.getInt("edition")
+
+    private void fillTable(String search, String where) {
+
+        List<BookInformation> listBookInfo = new BookDAO().listBookInformation(where, search);
+
+        if (listBookInfo.size() > 0) {
+            DefaultTableModel m = (DefaultTableModel) tabBooks.getModel();
+            for (BookInformation bInfo : listBookInfo) {
+                m.addRow(new Object[]{
+                    bInfo.getId(),
+                    bInfo.getIsbn(),
+                    bInfo.getTitle(),
+                    bInfo.getGenre(),
+                    bInfo.getAuthor(),
+                    bInfo.getPublisher(),
+                    bInfo.getEdition()
                 });
-                tabBooks.setModel(mTab);
             }
-            
-        } catch (Exception e) {
-            System.err.println("ERRO: " + e.getMessage());
-            
-        }finally{
-            DatabaseConnection.desconectar(con);
+            tabBooks.setModel(m);
+        } else {
+            JOptionPane.showMessageDialog(
+                    null, "Nenhum registro encontrado."
+            );
         }
     }
-    
-    private void configureTable(){
-        DefaultTableModel m = new DefaultTableModel(){
+
+    private void configureTable() {
+        DefaultTableModel m = new DefaultTableModel() {
             @Override
-            public boolean isCellEditable(int row, int column){
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
@@ -387,28 +374,27 @@ public class FormBookTable extends javax.swing.JInternalFrame {
         m.addColumn("Editora");
         m.addColumn("Autor");
         m.addColumn("Edição");
-        
+
         m.setNumRows(0);
         tabBooks.setModel(m);
     }
-       
-    private void initTableWithoutRow(){
-        DefaultTableModel m = (DefaultTableModel)
-                tabBooks.getModel();
+
+    private void initTableWithoutRow() {
+        DefaultTableModel m = (DefaultTableModel) tabBooks.getModel();
         m.setNumRows(0);
         tabBooks.setModel(m);
     }
-    
-    public void openForm(JInternalFrame f){
-       
+
+    public void openForm(JInternalFrame f) {
+
         Dimension d = getParent().getSize();
         getParent().add(f);
         f.setLocation(
-            (d.width- f.getWidth())/2,
-            (d.height- f.getHeight())/2
+                (d.width - f.getWidth()) / 2,
+                (d.height - f.getHeight()) / 2
         );
         f.setVisible(true);
-        
+
         this.dispose();
     }
 }

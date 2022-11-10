@@ -73,16 +73,8 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
     }
     
     public FormRegisterBook(int id) {
-        initComponents();
-        
-        this.setTitle("Cadastrar Livro");
-        this.setResizable(false);
-        this.setIconifiable(false);
-        this.setMaximizable(false);
-        this.setClosable(false);
-        txtId.setEditable(false);
-        
-        createFormatter("#############").install(txtIsbn);
+        this();
+        txtId.setText(String.valueOf(id));
         
         Book book = new BookDAO().searchById(id);
         
@@ -96,7 +88,8 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
             }
         }
         cbxAuthor.setSelectedIndex(i);
-        
+        System.out.println(i + " Author");
+
         DefaultComboBoxModel n = (DefaultComboBoxModel)cbxPublisher.getModel();
          
         for (i = 0; i < n.getSize(); i++) {
@@ -106,6 +99,7 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
             }
         }
         cbxPublisher.setSelectedIndex(i);
+        System.out.println(i + " Publisherr");
         
         DefaultComboBoxModel o = (DefaultComboBoxModel)cbxGenre.getModel();
         
@@ -116,7 +110,8 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
             }
         }
         cbxGenre.setSelectedIndex(i);
-
+        System.out.println(i + " Genre");
+        
         ButtonGroup bg_fg = new ButtonGroup();
         bg_fg.add(rdbAvailable);
         bg_fg.add(rdbUnavailable);
@@ -125,6 +120,11 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
             rdbAvailable.setSelected(true);
         else
             rdbUnavailable.setSelected(true);
+        
+        txtTitle.setText(book.getTitle());
+        txtIsbn.setText(book.getIsbn());
+        txtEdition.setText(String.valueOf(book.getEdition()));
+        txtDescription.setText(book.getDescription());
         
     }
     
@@ -460,9 +460,8 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
         txtTitle.setText("");
-        
-        txtIsbn.setText(String.valueOf(""));
-        cbxGenre.setSelectedItem("");
+        txtIsbn.setText("");
+        txtEdition.setText("");
         txtDescription.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
 

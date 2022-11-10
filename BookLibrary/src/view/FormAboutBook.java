@@ -4,6 +4,7 @@ import controller.BookDAO;
 import model.Book;
 import java.awt.Dimension;
 import javax.swing.JInternalFrame;
+import model.BookInformation;
 
 public class FormAboutBook extends javax.swing.JInternalFrame {
 
@@ -22,20 +23,23 @@ public class FormAboutBook extends javax.swing.JInternalFrame {
         
         txtDescription.setEditable(false);
         
-        Book book = new BookDAO().searchById(id);
+        BookInformation book = new BookDAO().searchByIdInformation(id);
         
+        String isbn = book.getIsbn();
         String title = book.getTitle();
-        String publisher = book.getId_publisher();
-        String author = book.getAuthor();
-        int isbn = book.getIsbn();
         String genre = book.getGenre();
+        String publisher = book.getPublisher();
+        String author = book.getAuthor();
+        int edition = book.getEdition();
         String description = book.getDescription();
                 
+        lblIsbn.setText(isbn);
         lblTitle.setText(title);
+        lblGenre.setText(genre);
         lblPublisher.setText(publisher);
         lblAuthor.setText(author);
-        lblIsbn.setText(String.valueOf(isbn));
-        lblGenre.setText(genre);
+        lblEdition.setText(String.valueOf(edition));
+        
         txtDescription.setText(description);
     }
 
@@ -63,6 +67,8 @@ public class FormAboutBook extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        lblEdition = new javax.swing.JLabel();
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/AboutBook.png"))); // NOI18N
 
@@ -124,13 +130,28 @@ public class FormAboutBook extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setText("Edição:");
+
+        lblEdition.setText("edition");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(276, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addGap(18, 18, 18))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblEdition))
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -148,14 +169,7 @@ public class FormAboutBook extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPublisher)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(276, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addGap(18, 18, 18))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,7 +192,11 @@ public class FormAboutBook extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblGenre)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(lblEdition))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
@@ -215,10 +233,12 @@ public class FormAboutBook extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAuthor;
+    private javax.swing.JLabel lblEdition;
     private javax.swing.JLabel lblGenre;
     private javax.swing.JLabel lblIsbn;
     private javax.swing.JLabel lblPublisher;

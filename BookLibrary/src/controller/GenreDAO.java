@@ -51,7 +51,32 @@ public class GenreDAO {
         }
     }
     
-    public int update(Genre genre){
+    public boolean remove(int id){
+        try {
+            String SQL = "delete from " + this.tableName + " where id=?";
+            
+            cmd = con.prepareStatement(SQL);
+            
+            //definir o valor do parâmetro
+            cmd.setInt(1, id);
+            
+            if (cmd.executeUpdate() > 0){
+                //Tudo certo com a atualização
+                return true;
+            }else{
+                //Ocorreu um erro ao atualizar;
+                return false;
+            }
+            
+        } catch (Exception e) {
+            System.err.println("ERRO: " + e.getMessage());
+            return false;
+        }finally{
+            DatabaseConnection.desconectar(con);
+        }
+    }
+    
+     public int update(Genre genre){
         try {
             String SQL = "update " + this.tableName + " set name=? where id=?";
             

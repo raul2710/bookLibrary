@@ -29,10 +29,7 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form FormBookRegisterBook
-     */
-    
-    private JPopupMenu menu;
-    
+     */   
     public FormRegisterBook() {
         initComponents();
         
@@ -45,26 +42,7 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
         
         createFormatter("#############").install(txtIsbn);
         
-        DefaultComboBoxModel m = new DefaultComboBoxModel();
-        List<Author> authorList = new AuthorDAO().listByName();
-        for(Author a : authorList){
-            m.addElement(a);
-        }
-        cbxAuthor.setModel(m);
-        
-        DefaultComboBoxModel n = new DefaultComboBoxModel();
-        List<Publisher> publisherList = new PublisherDAO().listByName();
-        for(Publisher p : publisherList){
-            n.addElement(p);
-        }
-        cbxPublisher.setModel(n);
-        
-        DefaultComboBoxModel o = new DefaultComboBoxModel();
-        List<Genre> genreList = new GenreDAO().listByName();
-        for(Genre g : genreList){
-            o.addElement(g);
-        }
-        cbxGenre.setModel(o);     
+        updateComboBox();
         
         ButtonGroup bg_fg = new ButtonGroup();
         bg_fg.add(rdbAvailable);
@@ -72,7 +50,7 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
         rdbAvailable.setSelected(true);  
     }
     
-    public FormRegisterBook(int id) {
+    public FormRegisterBook(int id) {     
         this();
         txtId.setText(String.valueOf(id));
         
@@ -125,7 +103,6 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
         txtIsbn.setText(book.getIsbn());
         txtEdition.setText(String.valueOf(book.getEdition()));
         txtDescription.setText(book.getDescription());
-        
     }
     
     /**
@@ -172,6 +149,9 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 formFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                formFocusLost(evt);
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -545,32 +525,17 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formFocusGained
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
-        DefaultComboBoxModel m = new DefaultComboBoxModel();
-        List<Author> authorList = new AuthorDAO().listByName();
-        for(Author a : authorList){
-            m.addElement(a);
-        }
-        cbxAuthor.setModel(m);
-        
-        DefaultComboBoxModel n = new DefaultComboBoxModel();
-        List<Publisher> publisherList = new PublisherDAO().listByName();
-        for(Publisher p : publisherList){
-            n.addElement(p);
-        }
-        cbxPublisher.setModel(n);
-        
-        DefaultComboBoxModel o = new DefaultComboBoxModel();
-        List<Genre> genreList = new GenreDAO().listByName();
-        for(Genre g : genreList){
-            o.addElement(g);
-        }
-        cbxGenre.setModel(o);  
+        updateComboBox();
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:]
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddAuthor;
@@ -617,5 +582,27 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
         }
 
         return formatter;
+    }
+    
+    private void updateComboBox(){
+        
+        List<Author> authorList = new AuthorDAO().listByName();
+        cbxAuthor.setModel(comboBoxModel(authorList));
+  
+        List<Publisher> publisherList = new PublisherDAO().listByName();  
+        cbxPublisher.setModel(comboBoxModel(publisherList));
+        
+        List<Genre> genreList = new GenreDAO().listByName();      
+        cbxGenre.setModel(comboBoxModel(genreList));  
+    }
+    
+    private DefaultComboBoxModel comboBoxModel(List testeParametro){
+        DefaultComboBoxModel o = new DefaultComboBoxModel();
+        
+        testeParametro.forEach(g -> {
+            o.addElement(g);
+        });
+        
+        return o;
     }
 }

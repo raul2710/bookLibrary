@@ -386,8 +386,8 @@ public class FormBookTable extends javax.swing.JInternalFrame {
         m.addColumn("Isbn");
         m.addColumn("Título");
         m.addColumn("Gênero");
-        m.addColumn("Editora");
         m.addColumn("Autor");
+        m.addColumn("Editora");
         m.addColumn("Edição");
 
         m.setNumRows(0);

@@ -1,7 +1,6 @@
 package view;
 
 import controller.BookDAO;
-import model.Book;
 import java.awt.Dimension;
 import javax.swing.JInternalFrame;
 import model.BookInformation;

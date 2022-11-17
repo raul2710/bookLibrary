@@ -11,7 +11,7 @@ import model.Author;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JPopupMenu;
+import javax.swing.JComboBox;
 import model.Genre;
 import model.Publisher;
 
@@ -42,7 +42,14 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
         
         createFormatter("#############").install(txtIsbn);
         
-        updateComboBox();
+        List<Author> authorList = new AuthorDAO().listById();
+        cbxAuthor.setModel(comboBoxModel(authorList));
+  
+        List<Publisher> publisherList = new PublisherDAO().listById();  
+        cbxPublisher.setModel(comboBoxModel(publisherList));
+        
+        List<Genre> genreList = new GenreDAO().listById();      
+        cbxGenre.setModel(comboBoxModel(genreList));
         
         ButtonGroup bg_fg = new ButtonGroup();
         bg_fg.add(rdbAvailable);
@@ -66,7 +73,6 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
             }
         }
         cbxAuthor.setSelectedIndex(i);
-        System.out.println(i + " Author");
 
         DefaultComboBoxModel n = (DefaultComboBoxModel)cbxPublisher.getModel();
          
@@ -77,7 +83,6 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
             }
         }
         cbxPublisher.setSelectedIndex(i);
-        System.out.println(i + " Publisherr");
         
         DefaultComboBoxModel o = (DefaultComboBoxModel)cbxGenre.getModel();
         
@@ -88,7 +93,6 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
             }
         }
         cbxGenre.setSelectedIndex(i);
-        System.out.println(i + " Genre");
         
         ButtonGroup bg_fg = new ButtonGroup();
         bg_fg.add(rdbAvailable);
@@ -525,7 +529,9 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formFocusGained
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
-        updateComboBox();
+        
+            updateComboBox(cbxGenre);
+        
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -584,25 +590,24 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
         return formatter;
     }
     
-    private void updateComboBox(){
+    private void updateComboBox(JComboBox comboBox){
         
-        List<Author> authorList = new AuthorDAO().listByName();
+        comboBox.getSelectedItem();
+        List<teste> authorList = new AuthorDAO().listById();
         cbxAuthor.setModel(comboBoxModel(authorList));
-  
-        List<Publisher> publisherList = new PublisherDAO().listByName();  
-        cbxPublisher.setModel(comboBoxModel(publisherList));
         
-        List<Genre> genreList = new GenreDAO().listByName();      
-        cbxGenre.setModel(comboBoxModel(genreList));  
+        //Last item add
+        int lastItem = comboBox.getItemCount()-1;
+        comboBox.setSelectedIndex(lastItem);
     }
     
-    private DefaultComboBoxModel comboBoxModel(List testeParametro){
-        DefaultComboBoxModel o = new DefaultComboBoxModel();
+    private DefaultComboBoxModel comboBoxModel(List listItens){
+        DefaultComboBoxModel m = new DefaultComboBoxModel();
         
-        testeParametro.forEach(g -> {
-            o.addElement(g);
+        listItens.forEach(itens -> {
+            m.addElement(itens);
         });
         
-        return o;
+        return m;
     }
 }

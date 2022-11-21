@@ -32,6 +32,13 @@ public class FormLoanBook extends javax.swing.JInternalFrame {
     public FormLoanBook() {
         initComponents();
         
+        this.setTitle("Empréstimo de livro");
+        this.setResizable(false);
+        this.setIconifiable(false);
+        this.setMaximizable(false);
+        this.setClosable(false);
+        txtId.setEditable(false);
+        
         createFormatter("##/##/####").install(txtDateBorrow);
         createFormatter("##/##/####").install(txtDateReturn);
         
@@ -78,7 +85,7 @@ public class FormLoanBook extends javax.swing.JInternalFrame {
     
     public FormLoanBook(int id) {
         this();
-        
+        txtId.setText(String.valueOf(id));
         Loan loan = new LoanDAO().searchById(id);
         
         DateTimeFormatter formatOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
@@ -128,7 +135,6 @@ public class FormLoanBook extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTituloPage = new javax.swing.JLabel();
         lblDataEmprestimo = new javax.swing.JLabel();
         lblDataDevolucao = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
@@ -144,8 +150,7 @@ public class FormLoanBook extends javax.swing.JInternalFrame {
         rdbNotReturned = new javax.swing.JRadioButton();
         btnCancel = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
-
-        lblTituloPage.setText("jLabel1");
+        lblTitulo = new javax.swing.JLabel();
 
         lblDataEmprestimo.setText("Data empréstimo: ");
 
@@ -181,6 +186,9 @@ public class FormLoanBook extends javax.swing.JInternalFrame {
             }
         });
 
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitulo.setText("Empréstimo de livro");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -199,40 +207,40 @@ public class FormLoanBook extends javax.swing.JInternalFrame {
                             .addComponent(btnSave)
                             .addGap(18, 18, 18)
                             .addComponent(btnCancel))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblDataDevolucao)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtDateReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblUsuario)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbxUser, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblLivro)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbxBook, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblDataEmprestimo)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblTituloPage)
-                                        .addComponent(txtDateBorrow, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(lblId)
-                                    .addGap(14, 14, 14))))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTitulo)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblDataDevolucao)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtDateReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblUsuario)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbxUser, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblLivro)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbxBook, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblDataEmprestimo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtDateBorrow, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lblId)
+                                        .addGap(14, 14, 14)))))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(lblTituloPage)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
+                .addComponent(lblTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblId)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -279,18 +287,14 @@ public class FormLoanBook extends javax.swing.JInternalFrame {
         loan.setDateBorrow(Date.valueOf(dateBorrow.toString()));
         loan.setDateReturn(Date.valueOf(dateReturn.toString()));
         
-        System.out.println(dateBorrow);
-        System.out.println(dateReturn);
-        
         User u = (User)cbxUser.getSelectedItem();
         loan.setId_user(u.getId());
             
         Book b = (Book)cbxBook.getSelectedItem();
         loan.setId_book(b.getId());
         
-        loan.setStatus(rdbReturned.isSelected() ? rdbReturned.getName() : rdbNotReturned.getName());
+        loan.setStatus(rdbReturned.isSelected() ? "Entregue" : "Não entregue");
     
-
         int res = -1;
         if (txtId.getText().isEmpty()){
             //Operação de INSERIR
@@ -331,7 +335,7 @@ public class FormLoanBook extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblLivro;
     private javax.swing.JLabel lblStatus;
-    private javax.swing.JLabel lblTituloPage;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JRadioButton rdbNotReturned;
     private javax.swing.JRadioButton rdbReturned;

@@ -32,11 +32,10 @@ public class LoanDAO {
             
             //definir o valor do parâmetro
             cmd.setInt(1, loan.getId_book());
-            cmd.setInt(2, loan.getId_book());
-            cmd.setInt(3, loan.getId_user());
-            cmd.setDate(4, loan.getDateBorrow());
-            cmd.setDate(5, loan.getDateReturn());
-            cmd.setString(6, loan.getStatus());
+            cmd.setInt(2, loan.getId_user());
+            cmd.setDate(3, loan.getDateBorrow());
+            cmd.setDate(4, loan.getDateReturn());
+            cmd.setString(5, loan.getStatus());
             
             //executar a operação
             if (cmd.executeUpdate() > 0){
@@ -58,19 +57,18 @@ public class LoanDAO {
     
     public int update(Loan loan){
         try {
-            String SQL = "update " + this.tableName + "set id_book=?, id_user=?, dateBorrow=?, dateReturn=?,"
-                    + " status=? where id=?";
+            String SQL = "update " + this.tableName + " set id_book=?, id_user=?, "
+                    + "dateBorrow=?, dateReturn=?, status=? where id=?";
             
             cmd = con.prepareStatement(SQL);
             
             //definir o valor do parâmetro
             cmd.setInt(1, loan.getId_book());
-            cmd.setInt(2, loan.getId_book());
-            cmd.setInt(3, loan.getId_user());
-            cmd.setDate(4, loan.getDateBorrow());
-            cmd.setDate(5, loan.getDateReturn());
-            cmd.setString(6, loan.getStatus());
-            cmd.setInt(7, loan.getId());
+            cmd.setInt(2, loan.getId_user());
+            cmd.setDate(3, loan.getDateBorrow());
+            cmd.setDate(4, loan.getDateReturn());
+            cmd.setString(5, loan.getStatus());
+            cmd.setInt(6, loan.getId());
             
             if (cmd.executeUpdate() > 0){
                 //Tudo certo com a atualização
@@ -88,12 +86,100 @@ public class LoanDAO {
         }
     }
     
-    public List<Loan> searchByName(String name){
+    public List<Loan> searchByUserId(int id){
         try {
-            String SQL = "select * from " + this.tableName + " where name=?";
+            String SQL = "select * from " + this.tableName + " where id_user=?";
             
             cmd = con.prepareStatement(SQL);
-            cmd.setString(1, name);
+            cmd.setInt(1, id);
+            
+            ResultSet rs = cmd.executeQuery();
+            List<Loan> lista = new ArrayList<>();
+            
+            while(rs.next()){
+                Loan m = new Loan(
+                    rs.getInt("id"),
+                    rs.getInt("id_book"),
+                    rs.getInt("id_user"),
+                    rs.getDate("dateBorrow"),
+                    rs.getDate("dateReturn"),
+                    rs.getString("status")     
+                );
+                lista.add(m);
+            }
+            return lista;
+        } catch (Exception e) {
+            System.err.println("ERRO: " + e.getMessage());
+            return null;
+        }finally{
+            DatabaseConnection.desconectar(con);
+        }
+    }
+    
+    public List<Loan> searchByBookId(int id){
+        try {
+            String SQL = "select * from " + this.tableName + " where id_book=?";
+            
+            cmd = con.prepareStatement(SQL);
+            cmd.setInt(1, id);
+            
+            ResultSet rs = cmd.executeQuery();
+            List<Loan> lista = new ArrayList<>();
+            
+            while(rs.next()){
+                Loan m = new Loan(
+                    rs.getInt("id"),
+                    rs.getInt("id_book"),
+                    rs.getInt("id_user"),
+                    rs.getDate("dateBorrow"),
+                    rs.getDate("dateReturn"),
+                    rs.getString("status")     
+                );
+                lista.add(m);
+            }
+            return lista;
+        } catch (Exception e) {
+            System.err.println("ERRO: " + e.getMessage());
+            return null;
+        }finally{
+            DatabaseConnection.desconectar(con);
+        }
+    }
+    
+    public List<Loan> searchByStatusReturned(){
+        try {
+            String SQL = "select * from " + this.tableName + " where status='Entregue'";
+            
+            cmd = con.prepareStatement(SQL);
+            
+            ResultSet rs = cmd.executeQuery();
+            List<Loan> lista = new ArrayList<>();
+            
+            while(rs.next()){
+                Loan m = new Loan(
+                    rs.getInt("id"),
+                    rs.getInt("id_book"),
+                    rs.getInt("id_user"),
+                    rs.getDate("dateBorrow"),
+                    rs.getDate("dateReturn"),
+                    rs.getString("status")     
+                );
+                lista.add(m);
+            }
+            return lista;
+        } catch (Exception e) {
+            System.err.println("ERRO: " + e.getMessage());
+            return null;
+        }finally{
+            DatabaseConnection.desconectar(con);
+        }
+    }
+    
+    public List<Loan> searchByStatusNotReturned(){
+        try {
+            String SQL = "select * from " + this.tableName + " where status='Não entregue'";
+            
+            cmd = con.prepareStatement(SQL);
             
             ResultSet rs = cmd.executeQuery();
             List<Loan> lista = new ArrayList<>();

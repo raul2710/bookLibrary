@@ -79,10 +79,10 @@ public class PublisherDAO {
     
     public List<Publisher> searchByName(String name){
         try {
-            String SQL = "select * from " + this.tableName + " where data=?";
+            String SQL = "select * from " + this.tableName + " where name ilike ?";
             
             cmd = con.prepareStatement(SQL);
-            cmd.setString(1, name);
+            cmd.setString(1, "%" + name + "%");
             
             ResultSet rs = cmd.executeQuery();
             List<Publisher> lista = new ArrayList<>();

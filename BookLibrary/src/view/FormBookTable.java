@@ -2,6 +2,7 @@ package view;
 
 import controller.BookDAO;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultButtonModel;
@@ -112,6 +113,12 @@ public class FormBookTable extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setText("Pesquisar:");
+
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
 
         rdbTitle.setText("Titulo");
         rdbTitle.addActionListener(new java.awt.event.ActionListener() {
@@ -272,7 +279,6 @@ public class FormBookTable extends javax.swing.JInternalFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         initTableWithoutRow();
-        ButtonGroup group = ((DefaultButtonModel) rdbAuthor.getModel()).getGroup();
 
         try {
             if (rdbGenre.isSelected())
@@ -319,6 +325,33 @@ public class FormBookTable extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.btnSearchActionPerformed(null);
     }//GEN-LAST:event_formInternalFrameActivated
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txtSearch.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(
+                    null, "Informe o critério de pesquisa."
+                );
+                
+            } else {
+                try {
+                    initTableWithoutRow();
+                    if (rdbGenre.isSelected())
+                        fillTable(txtSearch.getText(), "genre.name");
+                    else if (rdbPublisher.isSelected())
+                        fillTable(txtSearch.getText(), "publisher.name");
+                    else if (rdbAuthor.isSelected())
+                        fillTable(txtSearch.getText(), "author.name");
+                    else 
+                        fillTable(txtSearch.getText(), "title");
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Digite algo para pesquisar", "Error", JOptionPane.ERROR_MESSAGE);
+                }  
+            }
+        }  
+    }//GEN-LAST:event_txtSearchKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

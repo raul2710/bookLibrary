@@ -5,27 +5,27 @@
  */
 package view;
 
-import controller.GenreDAO;
+import controller.AuthorDAO;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Genre;
+import model.Author;
 
 /**
  *
  * @author Raul
  */
-public class FormTableUpdate extends javax.swing.JInternalFrame {
+public class FormAuthorTable extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form FormTableUpdate
      */
-    public FormTableUpdate() {
+    public FormAuthorTable() {
         initComponents();
         
-        this.setTitle("Pesquisa de livros");
+        this.setTitle("Tabela de autores");
         this.setResizable(false);
         this.setMaximizable(false);
         this.setIconifiable(false);
@@ -33,8 +33,8 @@ public class FormTableUpdate extends javax.swing.JInternalFrame {
 
         configureTable();
         
-        List<Genre> genreListId = new GenreDAO().listById();
-        fillTable(genreListId);
+        List<Author> authorListId = new AuthorDAO().listById();
+        fillTable(authorListId);
         
         configureButtonGroup();
     }
@@ -51,10 +51,10 @@ public class FormTableUpdate extends javax.swing.JInternalFrame {
         rdbId = new javax.swing.JRadioButton();
         rdbName = new javax.swing.JRadioButton();
         txtSearch = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblPesquisar = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabGenre = new javax.swing.JTable();
+        tabAuthor = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
 
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -89,12 +89,18 @@ public class FormTableUpdate extends javax.swing.JInternalFrame {
 
         rdbName.setText("Nome");
 
-        jLabel1.setText("Pesquisar:");
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Atualizar ");
+        lblPesquisar.setText("Pesquisar:");
 
-        tabGenre.setModel(new javax.swing.table.DefaultTableModel(
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitulo.setText("Autores cadastrados");
+
+        tabAuthor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -105,17 +111,17 @@ public class FormTableUpdate extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tabGenre.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabAuthor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabGenreMouseClicked(evt);
+                tabAuthorMouseClicked(evt);
             }
         });
-        tabGenre.addKeyListener(new java.awt.event.KeyAdapter() {
+        tabAuthor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                tabGenreKeyReleased(evt);
+                tabAuthorKeyReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(tabGenre);
+        jScrollPane1.setViewportView(tabAuthor);
 
         btnBack.setText("Voltar");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -133,9 +139,9 @@ public class FormTableUpdate extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnBack)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2)
+                        .addComponent(lblTitulo)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
+                            .addComponent(lblPesquisar)
                             .addGap(6, 6, 6)
                             .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
@@ -149,12 +155,12 @@ public class FormTableUpdate extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jLabel2)
+                .addComponent(lblTitulo)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jLabel1))
+                        .addComponent(lblPesquisar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rdbId)
                         .addComponent(rdbName))
@@ -173,26 +179,26 @@ public class FormTableUpdate extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdbIdActionPerformed
 
-    private void tabGenreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabGenreMouseClicked
+    private void tabAuthorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabAuthorMouseClicked
         //Double click
         if (evt.getClickCount() == 2) {
             //Descobrir a linha selecionada
-            int linha = tabGenre.getSelectedRow();
+            int linha = tabAuthor.getSelectedRow();
 
             //Recuperar o ID selecionado
             int id = Integer.parseInt(
-                tabGenre.getValueAt(linha, 0).toString()
+                tabAuthor.getValueAt(linha, 0).toString()
             );
 
             //Abrir o FormCadastro
-            FormRegisterGenre f = new FormRegisterGenre(id);
+            FormRegisterAuthor f = new FormRegisterAuthor(id);
             this.getDesktopPane().add(f);
             f.setVisible(true);
 
             //Fechar o FormPesquisa
             //this.dispose();
         }
-    }//GEN-LAST:event_tabGenreMouseClicked
+    }//GEN-LAST:event_tabAuthorMouseClicked
 
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         // TODO add your handling code here:
@@ -201,10 +207,10 @@ public class FormTableUpdate extends javax.swing.JInternalFrame {
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // TODO add your handling code here:
-        updateTableGenre();
+        updateTableAuthor();
     }//GEN-LAST:event_formInternalFrameActivated
 
-    private void tabGenreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabGenreKeyReleased
+    private void tabAuthorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabAuthorKeyReleased
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txtSearch.getText().isEmpty()) {
@@ -214,16 +220,16 @@ public class FormTableUpdate extends javax.swing.JInternalFrame {
             } else {
                 configureTable();
                 // PESQUISAR POR NOME
-                List<Genre> lista = new GenreDAO().searchByName(txtSearch.getText());
+                List<Author> lista = new AuthorDAO().searchByName(txtSearch.getText());
                 if (lista.size() > 0) {
-                    DefaultTableModel m = (DefaultTableModel) tabGenre.getModel();
-                    for (Genre espec : lista) {
+                    DefaultTableModel m = (DefaultTableModel) tabAuthor.getModel();
+                    for (Author espec : lista) {
                         m.addRow(new Object[]{
                             espec.getId(),
                             espec.getName()
                         });
                     }
-                    tabGenre.setModel(m);
+                    tabAuthor.setModel(m);
                 } else {
                     JOptionPane.showMessageDialog(
                         null, "Nenhum registro encontrado."
@@ -231,22 +237,79 @@ public class FormTableUpdate extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }//GEN-LAST:event_tabGenreKeyReleased
+    }//GEN-LAST:event_tabAuthorKeyReleased
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txtSearch.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(
+                    null, "Informe o critério de pesquisa."
+                );
+            } else {
+                if(rdbName.isSelected()){
+                    configureTable();
+                    List<Author> lista = new AuthorDAO()
+                        .searchByName(txtSearch.getText());
+                    if (lista.size() > 0) {
+                        DefaultTableModel m = (DefaultTableModel) tabAuthor.getModel();
+                        for (Author author : lista) {
+                            m.addRow(new Object[]{
+                                author.getId(),
+                                author.getName()
+                            });
+                        }
+                            tabAuthor.setModel(m);
+                    } else {
+                        JOptionPane.showMessageDialog(
+                            null, "Nenhum registro encontrado."
+                        );
+                    }   
+                }
+                
+                else{
+                    try {
+                        configureTable();
+                        Author author = new AuthorDAO()
+                            .searchById(Integer.parseInt(txtSearch.getText()));
+                        if (author != null) {
+                            DefaultTableModel m = (DefaultTableModel) tabAuthor.getModel();
+
+                            m.addRow(new Object[]{
+                                author.getId(),
+                                    author.getName()
+                            });
+
+                            tabAuthor.setModel(m);
+                        } else {
+                            JOptionPane.showMessageDialog(
+                                null, "Nenhum registro encontrado."
+                            );
+                        } 
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(
+                                null, "Digite apenas números."
+                        );
+                    }
+                }
+            }
+        }  
+    }//GEN-LAST:event_txtSearchKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblPesquisar;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JRadioButton rdbId;
     private javax.swing.JRadioButton rdbName;
-    private javax.swing.JTable tabGenre;
+    private javax.swing.JTable tabAuthor;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
     
@@ -260,17 +323,18 @@ public class FormTableUpdate extends javax.swing.JInternalFrame {
         rdbId.setSelected(true);
     }
     
-    private void fillTable(List<Genre> genreList) {
+    private void fillTable(List<Author> authorList) {
         
-        if (genreList.size() > 0) {
-            DefaultTableModel m = (DefaultTableModel) tabGenre.getModel();
-            for (Genre g : genreList) {
+        if (authorList.size() > 0) {
+            DefaultTableModel m = (DefaultTableModel) tabAuthor.getModel();
+            m.setNumRows(0);
+            for (Author g : authorList) {
                 m.addRow(new Object[]{
                     g.getId(),
                     g.getName()
                 });
             }
-            tabGenre.setModel(m);
+            tabAuthor.setModel(m);
         } else {
             JOptionPane.showMessageDialog(
                     null, "Nenhum registro encontrado."
@@ -289,17 +353,17 @@ public class FormTableUpdate extends javax.swing.JInternalFrame {
         m.addColumn("Nome");
 
         m.setNumRows(0);
-        tabGenre.setModel(m);
+        tabAuthor.setModel(m);
     }
     
-    private void updateTableGenre(){
-        List<Genre> genreList = null;
+    private void updateTableAuthor(){
+        List<Author> authorList = null;
         
         if(rdbName.isSelected())
-            genreList = new GenreDAO().listById();
+            authorList = new AuthorDAO().listById();
         else 
-            genreList = new GenreDAO().listById();
+            authorList = new AuthorDAO().listById();
         
-        fillTable(genreList);
+        fillTable(authorList);
     }
 }

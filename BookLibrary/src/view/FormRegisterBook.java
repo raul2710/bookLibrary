@@ -11,7 +11,6 @@ import model.Author;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import model.Genre;
 import model.Publisher;
 
@@ -191,6 +190,11 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
         lblCadastreSeuLivro.setText("Cadastre seu livro");
 
         cbxGenre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxGenre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxGenreActionPerformed(evt);
+            }
+        });
 
         btnSave.setText("Salvar");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -259,8 +263,23 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
         });
 
         cbxPublisher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxPublisher.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cbxPublisherFocusGained(evt);
+            }
+        });
+        cbxPublisher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxPublisherActionPerformed(evt);
+            }
+        });
 
         cbxAuthor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxAuthorActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Voltar");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -530,8 +549,6 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         
-            updateComboBox(cbxGenre);
-        
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -542,6 +559,23 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
     private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_formFocusLost
+
+    private void cbxPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPublisherActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cbxPublisherActionPerformed
+
+    private void cbxAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxAuthorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxAuthorActionPerformed
+
+    private void cbxGenreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxGenreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxGenreActionPerformed
+
+    private void cbxPublisherFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxPublisherFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxPublisherFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddAuthor;
@@ -589,18 +623,7 @@ public class FormRegisterBook extends javax.swing.JInternalFrame {
 
         return formatter;
     }
-    
-    private void updateComboBox(JComboBox comboBox){
-        
-        comboBox.getSelectedItem();
-        List<teste> authorList = new AuthorDAO().listById();
-        cbxAuthor.setModel(comboBoxModel(authorList));
-        
-        //Last item add
-        int lastItem = comboBox.getItemCount()-1;
-        comboBox.setSelectedIndex(lastItem);
-    }
-    
+               
     private DefaultComboBoxModel comboBoxModel(List listItens){
         DefaultComboBoxModel m = new DefaultComboBoxModel();
         

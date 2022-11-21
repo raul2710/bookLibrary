@@ -197,75 +197,7 @@ public class BookDAO {
             DatabaseConnection.desconectar(con);
         }
     }
-    
-    public List<Book> searchByPublisher(String publisher){
-        try {
-            String SQL = "select * from " + this.tableName + " where status=?";
-            
-            cmd = con.prepareStatement(SQL);
-            cmd.setString(1, publisher);
-            
-            ResultSet rs = cmd.executeQuery();
-            List<Book> lista = new ArrayList<>();
-            
-            while(rs.next()){
-                Book m = new Book(
-                    rs.getInt("id"),
-                    rs.getString("isbn"),
-                    rs.getString("title"),
-                    rs.getInt("id_genre"),
-                    rs.getInt("id_publisher"),
-                    rs.getInt("id_author"),
-                    rs.getInt("edition"),
-                    rs.getInt("rating"), 
-                    rs.getString("status"),
-                    rs.getString("description")
-                );
-                lista.add(m);
-            }
-            return lista;
-        } catch (Exception e) {
-            System.err.println("ERRO: " + e.getMessage());
-            return null;
-        }finally{
-            DatabaseConnection.desconectar(con);
-        }
-    }
-    
-    public List<Book> searchByAuthor(String status){
-        try {
-            String SQL = "select * from " + this.tableName + " where status=?";
-            
-            cmd = con.prepareStatement(SQL);
-            cmd.setString(1, status);
-            
-            ResultSet rs = cmd.executeQuery();
-            List<Book> lista = new ArrayList<>();
-            
-            while(rs.next()){
-                Book m = new Book(
-                    rs.getInt("id"),
-                    rs.getString("isbn"),
-                    rs.getString("title"),
-                    rs.getInt("id_genre"),
-                    rs.getInt("id_publisher"),
-                    rs.getInt("id_author"),
-                    rs.getInt("edition"),
-                    rs.getInt("rating"), 
-                    rs.getString("status"),
-                    rs.getString("description")
-                );
-                lista.add(m);
-            }
-            return lista;
-        } catch (Exception e) {
-            System.err.println("ERRO: " + e.getMessage());
-            return null;
-        }finally{
-            DatabaseConnection.desconectar(con);
-        }
-    }
-    
+ 
     public List<Book> listById(){
         try {
             String SQL = "select * from " + this.tableName + " order by id";

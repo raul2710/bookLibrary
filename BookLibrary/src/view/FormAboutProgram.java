@@ -46,7 +46,7 @@ public class FormAboutProgram extends javax.swing.JInternalFrame {
         txtAbout.setColumns(20);
         txtAbout.setLineWrap(true);
         txtAbout.setRows(5);
-        txtAbout.setText("      Projeto desenvolvido para a troca de livros entre um usuário \nqualquer e uma biblioteca central. Onde apenas os administradores\npodem adicionar livros a biblioteca central do sistema e excluir \nusúarios\n\n\n\n\nEngenharia da Computação 4°etapa\nDesenvolvido por Raul Tavares Danielli. \nID: 836461");
+        txtAbout.setText("      Projeto para prova final, desenvolvido para simular uma livraria.    Possuindo o cadastro de livros, autores, editoras, gêneros, usuários e  seus empréstimos de livros.\n\n\n\n\n\nEngenharia da Computação 6°etapa\nDisciplina de laboratório de programação\nDesenvolvido por Raul Tavares Danielli. \nID: 836461");
         jScrollPane1.setViewportView(txtAbout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

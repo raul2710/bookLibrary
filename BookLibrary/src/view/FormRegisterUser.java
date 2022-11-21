@@ -79,14 +79,14 @@ public class FormRegisterUser extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
         txtName = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        lblCadastro = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         lblSenha = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        lblImage = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         txtId = new javax.swing.JFormattedTextField();
         lblCpf = new javax.swing.JLabel();
@@ -109,8 +109,8 @@ public class FormRegisterUser extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Cadastro");
+        lblCadastro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCadastro.setText("Cadastro");
 
         lblNome.setText("Nome completo:");
 
@@ -127,7 +127,7 @@ public class FormRegisterUser extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Perfil.png"))); // NOI18N
+        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Perfil.png"))); // NOI18N
 
         lblCpf.setText("CPF:");
 
@@ -158,9 +158,9 @@ public class FormRegisterUser extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
-                                .addComponent(jLabel1)
+                                .addComponent(lblCadastro)
                                 .addGap(172, 172, 172)
-                                .addComponent(jLabel6))
+                                .addComponent(lblImage))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addComponent(lblNome)
@@ -227,8 +227,8 @@ public class FormRegisterUser extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel6))
+                        .addComponent(lblCadastro))
+                    .addComponent(lblImage))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNome)
@@ -387,13 +387,13 @@ public class FormRegisterUser extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnShowPassword;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblCadastro;
     private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblDataNascimento;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblStatus;

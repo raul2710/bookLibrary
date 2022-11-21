@@ -52,7 +52,7 @@ public class FormAboutBook extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        lblImage = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         lblPublisher = new javax.swing.JLabel();
@@ -61,15 +61,15 @@ public class FormAboutBook extends javax.swing.JInternalFrame {
         lblGenre = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescription = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        lblEditora = new javax.swing.JLabel();
+        lblAutor = new javax.swing.JLabel();
+        lblISBN = new javax.swing.JLabel();
+        lblGenero = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        lblEdicao = new javax.swing.JLabel();
         lblEdition = new javax.swing.JLabel();
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/AboutBook.png"))); // NOI18N
+        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/AboutBook.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -77,14 +77,14 @@ public class FormAboutBook extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5)
+                .addComponent(lblImage)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(71, 71, 71)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -110,26 +110,26 @@ public class FormAboutBook extends javax.swing.JInternalFrame {
         txtDescription.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descrição:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
         jScrollPane1.setViewportView(txtDescription);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("Editora:");
+        lblEditora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblEditora.setText("Editora:");
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setText("Autor(a):");
+        lblAutor.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblAutor.setText("Autor(a):");
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText("ISBN:");
+        lblISBN.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblISBN.setText("ISBN:");
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel4.setText("Gênero:");
+        lblGenero.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblGenero.setText("Gênero:");
 
-        jButton1.setText("Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setText("Voltar");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
 
-        jLabel6.setText("Edição:");
+        lblEdicao.setText("Edição:");
 
         lblEdition.setText("edition");
 
@@ -142,30 +142,30 @@ public class FormAboutBook extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(276, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btnBack)))
                 .addGap(18, 18, 18))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addComponent(lblEdicao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblEdition))
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(lblGenero)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblGenre))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(lblISBN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblIsbn))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(lblAutor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblAuthor))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblEditora)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPublisher)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -178,27 +178,27 @@ public class FormAboutBook extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPublisher)
-                    .addComponent(jLabel1))
+                    .addComponent(lblEditora))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAuthor)
-                    .addComponent(jLabel2))
+                    .addComponent(lblAutor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(lblISBN))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblGenre)
-                    .addComponent(jLabel4))
+                    .addComponent(lblGenero))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(lblEdicao)
                     .addComponent(lblEdition))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnBack)
                 .addGap(21, 21, 21))
         );
 
@@ -220,25 +220,25 @@ public class FormAboutBook extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         openForm(new FormBookTable());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnBackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton btnBack;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAuthor;
+    private javax.swing.JLabel lblAutor;
+    private javax.swing.JLabel lblEdicao;
     private javax.swing.JLabel lblEdition;
+    private javax.swing.JLabel lblEditora;
+    private javax.swing.JLabel lblGenero;
     private javax.swing.JLabel lblGenre;
+    private javax.swing.JLabel lblISBN;
+    private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblIsbn;
     private javax.swing.JLabel lblPublisher;
     private javax.swing.JLabel lblTitle;

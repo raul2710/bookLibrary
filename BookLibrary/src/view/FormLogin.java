@@ -37,16 +37,16 @@ public class FormLogin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jplCenter = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblLogin = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        lblCadastrar = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblSenha = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblImage = new javax.swing.JLabel();
+        lblBiblioteca = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -63,10 +63,10 @@ public class FormLogin extends javax.swing.JFrame {
 
         jplCenter.setBackground(new java.awt.Color(72, 84, 96));
 
-        jLabel1.setBackground(new java.awt.Color(187, 187, 187));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setText("Login");
+        lblLogin.setBackground(new java.awt.Color(187, 187, 187));
+        lblLogin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblLogin.setForeground(new java.awt.Color(204, 204, 204));
+        lblLogin.setText("Login");
 
         btnLogin.setText("Entrar");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -75,11 +75,11 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel2.setText("Cadastrar");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblCadastrar.setForeground(new java.awt.Color(204, 204, 204));
+        lblCadastrar.setText("Cadastrar");
+        lblCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                lblCadastrarMouseClicked(evt);
             }
         });
 
@@ -89,11 +89,11 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel3.setText("Email:");
+        lblEmail.setForeground(new java.awt.Color(204, 204, 204));
+        lblEmail.setText("Email:");
 
-        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel4.setText("Senha:");
+        lblSenha.setForeground(new java.awt.Color(204, 204, 204));
+        lblSenha.setText("Senha:");
 
         javax.swing.GroupLayout jplCenterLayout = new javax.swing.GroupLayout(jplCenter);
         jplCenter.setLayout(jplCenterLayout);
@@ -104,8 +104,8 @@ public class FormLogin extends javax.swing.JFrame {
                 .addGroup(jplCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jplCenterLayout.createSequentialGroup()
                         .addGroup(jplCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
+                            .addComponent(lblSenha)
+                            .addComponent(lblEmail))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jplCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtPassword)
@@ -116,29 +116,29 @@ public class FormLogin extends javax.swing.JFrame {
                         .addGroup(jplCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnLogin)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplCenterLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(lblCadastrar)
                                 .addGap(9, 9, 9)))
                         .addGap(116, 116, 116))))
             .addGroup(jplCenterLayout.createSequentialGroup()
                 .addGap(132, 132, 132)
-                .addComponent(jLabel1)
+                .addComponent(lblLogin)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jplCenterLayout.setVerticalGroup(
             jplCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jplCenterLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addComponent(jLabel1)
+                .addComponent(lblLogin)
                 .addGap(27, 27, 27)
                 .addGroup(jplCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(lblEmail))
                 .addGap(18, 18, 18)
                 .addGroup(jplCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
+                    .addComponent(lblSenha)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(lblCadastrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLogin)
                 .addContainerGap(38, Short.MAX_VALUE))
@@ -147,12 +147,12 @@ public class FormLogin extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(30, 39, 46));
         jPanel3.setForeground(new java.awt.Color(255, 63, 52));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BooksCollectionLogin.png"))); // NOI18N
+        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BooksCollectionLogin.png"))); // NOI18N
 
-        jLabel6.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel6.setText("Biblioteca de trocas");
+        lblBiblioteca.setBackground(new java.awt.Color(153, 153, 153));
+        lblBiblioteca.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblBiblioteca.setForeground(new java.awt.Color(204, 204, 204));
+        lblBiblioteca.setText("Biblioteca de trocas");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -162,19 +162,19 @@ public class FormLogin extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(jLabel6))
+                        .addComponent(lblBiblioteca))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(79, 79, 79)
-                        .addComponent(jLabel5)))
+                        .addComponent(lblImage)))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addComponent(lblImage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addComponent(lblBiblioteca)
                 .addGap(45, 45, 45))
         );
 
@@ -212,14 +212,14 @@ public class FormLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void lblCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastrarMouseClicked
         // TODO add your handling code here:
         FormRegisterUser f = new FormRegisterUser();
         f.setVisible(true);
 
         //Fechar o Formulário Login
         this.dispose();
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_lblCadastrarMouseClicked
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
@@ -281,16 +281,16 @@ public class FormLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jplCenter;
+    private javax.swing.JLabel lblBiblioteca;
+    private javax.swing.JLabel lblCadastrar;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblImage;
+    private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblSenha;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables

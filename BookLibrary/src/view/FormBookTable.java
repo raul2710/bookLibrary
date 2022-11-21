@@ -52,16 +52,16 @@ public class FormBookTable extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabBooks = new javax.swing.JTable();
         btnAboutBook = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblPesquisar = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         rdbTitle = new javax.swing.JRadioButton();
         rdbPublisher = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
         rdbAuthor = new javax.swing.JRadioButton();
         rdbIsbn = new javax.swing.JRadioButton();
-        jButton2 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        lblImage = new javax.swing.JLabel();
         rdbGenre = new javax.swing.JRadioButton();
 
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -112,7 +112,7 @@ public class FormBookTable extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Pesquisar:");
+        lblPesquisar.setText("Pesquisar:");
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -134,8 +134,8 @@ public class FormBookTable extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Pesquisar na Biblioteca Virtual");
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitulo.setText("Pesquisar na Biblioteca Virtual");
 
         rdbAuthor.setText("Autor");
         rdbAuthor.addActionListener(new java.awt.event.ActionListener() {
@@ -151,10 +151,10 @@ public class FormBookTable extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Voltar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setText("Voltar");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
 
@@ -165,7 +165,7 @@ public class FormBookTable extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BookSearch.png"))); // NOI18N
+        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BookSearch.png"))); // NOI18N
 
         rdbGenre.setText("Gênero");
 
@@ -178,9 +178,9 @@ public class FormBookTable extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addComponent(lblTitulo)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(lblPesquisar)
                                 .addGap(6, 6, 6)
                                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -196,10 +196,10 @@ public class FormBookTable extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(rdbGenre)))
                         .addGap(261, 261, 261)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton2)
+                            .addComponent(btnBack)
                             .addGap(18, 18, 18)
                             .addComponent(btnAboutBook))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -211,12 +211,12 @@ public class FormBookTable extends javax.swing.JInternalFrame {
                 .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(lblTitulo)
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
-                                .addComponent(jLabel1))
+                                .addComponent(lblPesquisar))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtSearch)
                                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -228,12 +228,12 @@ public class FormBookTable extends javax.swing.JInternalFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(rdbIsbn)
                                 .addComponent(rdbGenre))))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
+                    .addComponent(btnBack)
                     .addComponent(btnAboutBook))
                 .addGap(23, 23, 23))
         );
@@ -271,10 +271,10 @@ public class FormBookTable extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdbIsbnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
@@ -356,12 +356,12 @@ public class FormBookTable extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAboutBook;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblImage;
+    private javax.swing.JLabel lblPesquisar;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JRadioButton rdbAuthor;
     private javax.swing.JRadioButton rdbGenre;
     private javax.swing.JRadioButton rdbIsbn;

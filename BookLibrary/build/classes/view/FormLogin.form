@@ -86,8 +86,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSenha" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -101,7 +101,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblCadastrar" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -111,7 +111,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblLogin" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -120,19 +120,19 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblLogin" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtUser" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSenha" min="-2" max="-2" attributes="0"/>
                           <Component id="txtPassword" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCadastrar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="38" max="32767" attributes="0"/>
@@ -141,7 +141,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="lblLogin">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="bb" green="bb" red="bb" type="rgb"/>
@@ -163,7 +163,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoginActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="lblCadastrar">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -171,7 +171,7 @@
                 <Property name="text" type="java.lang.String" value="Cadastrar"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel2MouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblCadastrarMouseClicked"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtUser">
@@ -179,7 +179,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUserActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
+            <Component class="javax.swing.JLabel" name="lblEmail">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -187,7 +187,7 @@
                 <Property name="text" type="java.lang.String" value="Email:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
+            <Component class="javax.swing.JLabel" name="lblSenha">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -216,11 +216,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblBiblioteca" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblImage" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="42" max="32767" attributes="0"/>
@@ -231,23 +231,23 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblImage" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblBiblioteca" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel5">
+            <Component class="javax.swing.JLabel" name="lblImage">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/BooksCollectionLogin.png"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel6">
+            <Component class="javax.swing.JLabel" name="lblBiblioteca">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="99" type="rgb"/>
